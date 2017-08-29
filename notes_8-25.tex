@@ -1,0 +1,49 @@
+\documentclass{article}
+
+\usepackage{mathpartir}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage{xcolor}
+\usepackage{cmll}
+
+\newcommand{\proves}{\vdash}
+\newcommand{\provese}{\vdash^\varepsilon}
+
+\newcommand{\consgrade}[1]{\textcolor{blue}{#1}}
+\newcommand{\prodgrade}[1]{\textcolor{red}{#1}}
+\newcommand{\U}[2]{\textcolor{red}{\mathcal{U}}\textcolor{black}{(}\consgrade{#1}, \prodgrade{#2}\textcolor{black}{)}}
+\newcommand{\V}[2]{\textcolor{blue}{\mathcal{V}}\textcolor{black}{(}\consgrade{#1}, \prodgrade{#2}\textcolor{black}{)}}
+
+\newcommand{\bangg}[1]{\mathord{!_{\consgrade{#1}}}}
+\newcommand{\queryg}[1]{\mathord{?_{\prodgrade{#1}}}}
+\newcommand{\bang}{\bangg{}}
+\newcommand{\query}{\queryg{}}
+
+\title{Notes from August 25, 2017}
+
+
+
+\begin{document}
+
+$$\setlength\arraycolsep{20pt}
+\renewcommand{\arraystretch}{3}
+\begin{array}{cc}
+  \multicolumn{2}{c}{\infer{ }{\tau \vdash \tau}}\\
+  \infer{\Gamma, \varphi, \psi \proves \Delta}{\Gamma, \varphi \otimes \psi \proves \Delta} & \infer{\Gamma \proves \varphi, \Delta\\\Gamma' \proves \psi, \Delta}{\Gamma, \Gamma' \proves \varphi \otimes \psi, \Delta, \Delta'}\\
+  \infer{\Gamma, \varphi \proves \Delta\\ \Gamma', \psi \proves \Delta'}{\Gamma, \Gamma', \varphi \parr \psi \proves \Delta, \Delta'} & \infer{\Gamma \proves \varphi, \psi, \Delta}{\Gamma \proves \varphi \parr \psi, \Delta}\\
+  \infer{\Gamma, \varphi \proves \Delta}{\Gamma, \bangg{1}\varphi \proves \Delta} & \infer{\bangg{\vec{r}}\Gamma \proves \varphi, \queryg{\vec{e}}\Delta}{\bangg{r' \cdot \vec{r}} \proves \bangg{r'}\varphi, \queryg{\U{r'}{\vec{e}}}\Delta}\\
+  \infer{\Gamma, \bangg{r}\varphi, \bangg{s}\varphi \proves \Delta}{\Gamma \bangg{r + s}\varphi \proves \Delta} & \infer{\Gamma \proves \Delta}{\Gamma, \bangg{0}\varphi \proves \Delta}\\
+  \infer{\Gamma \proves \varphi, \Delta}{\Gamma \proves \queryg{1}\varphi, \Delta} & \infer{\bangg{\vec{r}}\Gamma, \varphi \proves \queryg{\vec{e}}\Delta}{\bangg{\V{\vec{r}}{e}}\Gamma, \queryg{e}\varphi \proves \queryg{\vec{e}\cdot e}\Delta}\\
+  \infer{\Gamma \proves \queryg{e}\varphi, \queryg{e'}\varphi, \Delta}{\Gamma \proves \queryg{e + e'}\varphi, \Delta} & \infer{\Gamma \proves \Delta}{\Gamma \proves \queryg{0}\varphi, \Delta}
+\end{array}$$
+
+$$\U{r_1 \cdot r_2}{\vec{e}} = \U{r_2}{\U{r_1}{\vec{e}}}$$
+$$\U{r_1 + r_2}{\vec{e}} = \U{r_1}{\vec{e}} + \U{r_2}{\vec{e}}$$
+$$\U{0}{\vec{e}} = \prodgrade{0}\;\;\U{1}{\vec{e}} = \prodgrade{\vec{e}}$$
+$$\V{r}{\U{r'}{e}} = \V{r}{e} \cdot \consgrade{r'}$$
+$$\U{r}{\vec{e}} \cdot \prodgrade{e} = \U{r}{e \cdot \vec{e}}$$
+
+
+\end{document}
