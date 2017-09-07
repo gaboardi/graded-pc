@@ -195,6 +195,16 @@ Then, both $\consring$ and $\prodring$ are the natural numbers with the standard
 Moreover $\U{r}{e} = r \cdot e$ and $\V{r}{e} = r \cdot e$.
 With this interpretation, the above equations are satisfied.
 
+\paragraph{Note 9-7-2017}
+I wrote down something Marco mentioned earlier: that he has two types of cost-counting analyses.
+One uses a traditional Kleisli-style arrow $$A \to M_c B$$ which calculates cost correctly in a call-by-value language. 
+The other uses arrows of the form $$M_{c_1} A \to M_{c_2} B,$$ which calculates cost in a call-by-name language.
+
+It occurs to me that, since his call-by-name language almost certainly allows arbitrary weakening and contraction, that it exists in the coKleisli category for a $\bang$ operator.
+That is, the call-by-name arrows are actually of the form $$\bang M_{c_1} A \to M_{c_2} B,$$ which is predicted by \citet{Hirsch}.
+Since there does not seem to be a distributive law between $\bang$ and $\queryg{n}$, it is likely that the strict case acts over the functor category for $\bang$, so that the call-by-value arrows are actually of the form $\bang A \to M_{c}\bang B$, as predicted by \citet{Hirsch}.
+However, this seems to indicate that the strict and lazy notions from \citet{Hirsch} should generalize in this work.
+
 \section{Motivating Reasoning Example}
 
 Imagine an analysis where terms may be either terminating or possibly-non-terminating (as producer effects) and may be used any natural number of times (as consumer effects).
